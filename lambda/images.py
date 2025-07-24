@@ -15,7 +15,7 @@ import sys
 
 class RekognitionImageTester:
     def __init__(self, region_name='us-east-1'):
-        """Initialize the Rekognition client"""
+        """Initialize the Rekognition client, default region is us-east-1"""
         try:
             self.rekognition = boto3.client('rekognition', region_name=region_name)
             print("✓ AWS Rekognition client initialized successfully")
