@@ -13,10 +13,16 @@ A comprehensive Python tool for analyzing images using AWS Rekognition with visu
 - **Visual Bounding Boxes**: See exactly what was detected with colored boxes
 - **Multiple Output Formats**: 
   - Interactive matplotlib plots
-  - Web-based HTML reports
   - Saved PNG images
 - **Dual Mode**: Analyze sample images or upload your own
-- **Professional Reports**: Beautiful HTML reports with statistics
+- **S3 Bucket Support**: Analyze images directly from an S3 bucket
+
+## aws-rekognition-image-analyzer capabilities 🚀
+
+- **Facial Analysis**: Detect and analyze faces in images using AWS Rekognition
+- **Label Detection**: Identify labels in images
+- **Draw Bounding Boxes**: Visualize detected faces and objects with bounding boxes using Matplotlib
+- **CLI interface**: Command-line interface for picking options and text analysis
 
 ## Prerequisites 📋
 
@@ -52,6 +58,7 @@ python lambda/image_test.py
 ### Options
 1. **Sample Images**: Analyze curated test images from the internet
 2. **Custom Images**: Upload and analyze your own image files
+3. **S3 Bucket**: Analyze images stored in an S3 bucket
 
 ## AWS Permissions 🔐
 
@@ -92,19 +99,22 @@ Your AWS user/role needs these permissions:
 ```
 aws-rekognition-image-analyzer/
 ├── lambda/
-│   └── image_test.py          # Main analysis script
-├── requirements.txt           # Python dependencies
-├── main.tf                   # Terraform configuration
-├── versions.tf               # Terraform version constraints
-├── providers.tf              # Provider configurations
-├── .gitignore               # Git ignore patterns
-└── README.md                # This file
+│   └── images.py               # Main analysis script
+│   └── camera_test.py          # Camera backend test script
+│   └── video_stream.py         # Camera and video stream scripts
+│   └── rekognition_output/     # Matplotlib PNG files
+│   └── images/                 # Sample images for testing
+├── requirements.txt            # Python dependencies
+├── main.tf                     # Terraform configuration
+├── versions.tf                 # Terraform version constraints
+├── providers.tf                # Provider configurations
+├── .gitignore                  # Git ignore patterns
+└── README.md                   # This file
 ```
 
 ## Output Directories 📂
 
 - `rekognition_output/`: Matplotlib PNG files
-- `rekognition_web_output/`: HTML reports and annotated images
 
 ## Features in Detail 🔍
 
@@ -114,24 +124,19 @@ aws-rekognition-image-analyzer/
 - **Age and emotion labels** for faces
 - **Object classification** with percentage confidence
 
-### Web Reports
-- **Professional HTML layout** with CSS styling
-- **Interactive image viewing** with annotations
-- **Detailed statistics** and summaries
-- **Responsive design** for different screen sizes
-
 ## Troubleshooting 🔧
 
 ### Matplotlib Display Issues
 The script automatically handles display issues by:
 1. Trying multiple backends (Qt5Agg, TkAgg, etc.)
 2. Falling back to file saving
-3. Generating web-based reports as backup
 
 ### Common Issues
-- **No camera needed**: This tool works with static images only
-- **AWS credentials**: Ensure `aws configure` is properly set up
-- **Permissions**: Verify Rekognition permissions in your AWS account
+* **No camera needed**: images.py works with static images in jpg or png format
+* **Video Stream needs camera**: Video stream script may require a plugged in camera due to integrated camera not being found using OpenCV.
+* **Camera Test Script**: Use the camera_test.py script to test your camera setup.
+* **AWS credentials**: Ensure `aws configure` is properly set up
+* **Permissions**: Verify Rekognition permissions in your AWS account
 
 ## Contributing 🤝
 
